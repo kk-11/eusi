@@ -2,29 +2,104 @@
 body{
   --primary-red: #840032;
   --primary-blue: #002642;
+  letter-spacing: 10px;
+}
+
+.globeWrapper {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top:0;
+  left:0;
+}
+
+h1 {
+  text-align: right;
+  font-size: 2.3em;
+  line-height: 1.1;
+}
+
+.bar {
+  z-index: 9;
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin-top: 1.6em;
+  justify-content: flex-end;
+  
+  &.bottom {
+    bottom: 0;
+    position: absolute;
+    justify-content: center;
+    margin-bottom: 1.6em;
+  }
+}
+
+#files {
+  display: none;
+}
+
+.imageList {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9;
+  width: 200px;
+  height: 100vh;
+  overflow-y: scroll;
+  &::after {
+    display: block;
+    position: fixed;
+    height: 100px;
+    width: 100%;
+    content: "";
+    background-image: linear-gradient(transparent, black);
+    bottom: 0;
+    left: 0;
+  }
+
+  > img {
+    width: 100%;
+    border: 10px solid white;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+}
+
+.fileSelect {
+  border: 2px solid var(--primary-red);
+  border-radius: 5px;
+  padding: 0.6em 1.6em;
+  cursor: pointer;
 }
 
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-  color: var(--primary-blue);
+  filter: drop-shadow(1px 5px 4px rgba(255, 255,255, 0.2));
+  height: 0.8em;
+  margin-right: 30px;
+  aspect-ratio: 1;
+  transform: rotateZ(45deg);
+  transform-origin: center;
+  animation: spin 3.2s forwards infinite linear;
 }
 
-
-.card {
-  padding: 2em;
-  letter-spacing: 10px;
+@keyframes spin {
+  0% {
+    transform: rotateY(0deg) ;
+  }
+  100% {
+    transform: rotateY(360deg) ;
+  }
 }
 
-.read-the-docs {
-  color: #888;
+@media (max-width: 100px) {
+  body {
+    display: none;
+  }
 }
