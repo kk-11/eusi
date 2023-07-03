@@ -18,10 +18,14 @@ const handleFileUpload = (e, globeEl, setPolygonsData, setRingsData, setFileLoad
       );
       setPolygonsData(JSON.parse(evt.target.result).features);
       setRingsData([{ lng: center.geometry.coordinates[0], lat: center.geometry.coordinates[1] }]);
+      setFileLoading(false);
     };
-    reader.onerror = (evt) => console.error(evt);
+    reader.onerror = (evt) => {
+      setFileLoading(false);
+      console.error(evt);
+    };
   }
-  setFileLoading(false);
+  
 };
 
 export default handleFileUpload;

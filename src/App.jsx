@@ -17,14 +17,17 @@ function App() {
 
   const onWindowResize = () => {
     const globe = globeEl.current;
-    if (!globe) return;
+    if (!globe) return; // why do I need to do this? test.
     globe.camera().updateProjectionMatrix();
     globe.renderer().setSize(window.innerWidth, window.innerHeight);
   };
 
+  // I don't like when custom hooks don't return data
+  // ok at top level of app
   useEventListener('resize', onWindowResize);
 
   useEffect(() => {
+    // move to custom hook?
     const globe = globeEl.current;
     globe.controls().autoRotate = polygonsData.length === 0;
     globe.controls().autoRotateSpeed = 0.35;
@@ -36,12 +39,14 @@ function App() {
       .then((res) => setImage(res));
   };
 
+
   return (
     <>
       <div className="bar top">
         <h1>
           Orbital
           <br />
+          {/* might be bad to put an image in a h1 */}
           <img src={logo} className="logo" alt="OEI logo" />
           Edge
           <br />
@@ -62,7 +67,7 @@ function App() {
       </div>
       <div className="imageList">
         {images.map((im) => (
-          <img key={im.lat} src={earthNight} onClick={() => alert('open large image dialoge')}/>
+          <img key={im.lat} src={earthNight} onClick={() => alert('open large image modal?')}/>
         ))}
       </div>
       <div className="bar bottom">
@@ -72,6 +77,7 @@ function App() {
           accept="application/geo+json"
           multiple={false}
           onChange={(e) =>
+            // Not a fan of all the arguments.. maybe make a custom hook instead
             handleFileUpload(e, globeEl, setPolygonsData, setRingsData, setFileLoading)
           }
         />
@@ -85,7 +91,4 @@ function App() {
 
 export default App;
 
-{
-  /* <img src={decodeURIComponent(image)} /> */
-  //{/* <button onClick={handle}>get sentinel data</button> */}
-}
+

@@ -3,6 +3,8 @@ body{
   --primary-red: #840032;
   --primary-blue: #002642;
   letter-spacing: 10px;
+  /* animation: spin forwards infinite 12s linear;
+  transform-origin: center; */
 }
 
 .globeWrapper {
@@ -60,17 +62,24 @@ h1 {
 
   > img {
     width: 100%;
-    border: 10px solid white;
+    border: 10px solid var(--primary-red);
     box-sizing: border-box;
     cursor: pointer;
+    &:nth-child(2n) {
+      border-color:  var(--primary-blue);
+    }
   }
 }
 
 .fileSelect {
-  border: 2px solid var(--primary-red);
+  border: 3px solid var(--primary-blue);
   border-radius: 5px;
   padding: 0.6em 1.6em;
   cursor: pointer;
+  transition: border-color 333ms;
+  &:hover {
+    border-color: var(--primary-red);
+  }
 }
 
 #root {
@@ -91,15 +100,15 @@ h1 {
 
 @keyframes spin {
   0% {
-    transform: rotateY(0deg) ;
+    transform: rotate(0deg) ;
   }
   100% {
-    transform: rotateY(360deg) ;
+    transform: rotate(360deg) ;
   }
 }
 
-@media (max-width: 100px) {
+/* @media (min-width: 100px) {
   body {
     display: none;
   }
-}
+} */

@@ -10,10 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@openglobus/og": "^0.16.3",
     "@sentinel-hub/sentinelhub-js": "^0.3.0",
     "@turf/turf": "^6.5.0",
-    "cors": "^2.8.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-globe.gl": "^2.24.1",
