@@ -3,8 +3,6 @@ body{
   --primary-red: #840032;
   --primary-blue: #002642;
   letter-spacing: 10px;
-  /* animation: spin forwards infinite 12s linear;
-  transform-origin: center; */
 }
 
 .globeWrapper {
@@ -100,10 +98,10 @@ h1 {
 
 @keyframes spin {
   0% {
-    transform: rotate(0deg) ;
+    transform: rotateY(0deg) ;
   }
   100% {
-    transform: rotate(360deg) ;
+    transform: rotateY(360deg) ;
   }
 }
 

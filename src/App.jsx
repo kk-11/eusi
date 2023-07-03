@@ -18,8 +18,12 @@ function App() {
   const onWindowResize = () => {
     const globe = globeEl.current;
     if (!globe) return; // why do I need to do this? test.
+    globe.camera().aspect = window.innerWidth / window.innerHeight;
+
     globe.camera().updateProjectionMatrix();
+        
     globe.renderer().setSize(window.innerWidth, window.innerHeight);
+
   };
 
   // I don't like when custom hooks don't return data
