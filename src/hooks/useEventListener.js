@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 
-// this looks nice.
 const useEventListener = (eventType, callback) => {
   useEffect(() => {
     window.addEventListener(eventType, callback, false);

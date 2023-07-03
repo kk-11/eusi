@@ -62,7 +62,7 @@ function App() {
           polygonAltitude={0.1}
           globeImageUrl={earthNight}
           polygonsData={polygonsData}
-          onGlobeClick={(e) => setImages((prev) => [...prev, e])}
+          onGlobeClick={(e) => console.log(e) || setImages((prev) => [...prev, e])}
         />
       </div>
       <div className="imageList">
