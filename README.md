@@ -40,13 +40,13 @@ Globe.gl was great for the most part. It exposed a ton of Three functionality, a
 It was interesting using pure javascript again, felt like living on the edge, but it's a lot of fun for individual projects or proof of concept work.
 
 ### Known issues
-  - window resizing doesn't properly update the canvas.
+  - totally breaks if I don't use the example geojson.
   - no mobile implementation.
   - click map doesn't do anything right now, would be straightforward enough to get data as lat and long are passed in the click event of the globe.
-  - I haven't tested many geojson files, I think large areas might look bad, would need to reconsider ring implementation.
-  - I need to test waaaaaay more, like I'm not sure if the returned image is actually correct, like a bounding box is a box, but and area can be any shape, so I'd probably need to create a bounding box from the polygon, hopefully turf would have some utilities for that.
+  - I need to test way more, like I'm not sure if the returned image is actually correct, like a bounding box is a box, and area can be any shape, so I'd probably need to create a bounding box from the polygon, hopefully turf would have some utilities for that.
 
 ### To do
+  - really a lot, this is very much a WIP
   - test
   - Get a real designer :|
   - mobile
