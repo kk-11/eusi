@@ -2,6 +2,8 @@
 
 ![screenshot](https://github.com/kk-11/eusi/blob/master/src/assets/screenshot.png?raw=true)
 
+[Demo](https://zesty-liger-2ca606.netlify.app/)
+
 ### TLDR;
 `yarn install && yarn run dev`
 
