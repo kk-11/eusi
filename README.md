@@ -1,5 +1,7 @@
 # EUSI Coding Challenge
 
+![screenshot](https://github.com/kk-11/eusi/blob/master/src/assets/screenshot.png?raw=true)
+
 ### TLDR;
 `yarn install && yarn run dev`
 
@@ -17,38 +19,31 @@
 - globe.gl, a three.js wrapper
 - netlify for deployment and serverless functions
 - turf for geolocation calculations
-- sentinal hub js package for api data calls
+- sentinal hub js package for sentinal api calls
 
 ### Thoughts
 
-This was a fun challenge, but pretty hefty! And it's certainly not a finished project right now.
+This was a fun challenge, but pretty hefty! And there's a lot more that could be added.
 
-I've found some of the challenge description to be a bit unclear.
+The click doesn't appear to be accurate on the globe. This could be the 3D modal or it could be my bounding box implementation.
 
-The recommendeded sentinel api appears to be primarily for satellite imaging, and of course the name of the company hints at earth imaging.
+Sentinel was quite difficult to work with, very technial descriptions.
 
-However, being able `to search an API for results within the area of the uploaded file.` seems like I should maybe use another api for text based results about an area of interest?
-
-Or is it just to return differently processed images from sentinel to be able to search and filter?
-
-I've never used serverless functions before so that was cool, although sentinel didn't require a client secret to return an image so it wasn't super necessary. 
+I've never used serverless functions before so that was cool, although sentinel didn't require a client secret to return an image so it wasn't exactly necessary, but nice to implement for future stuff. 
 
 The native html input file select was awesome. Super straighforward, and worked perfectly.
 
-Globe.gl was great for the most part. It exposed a ton of Three functionality, although I did get some jank randomly at times so would probably want to build a globe with Three myself for a real project. I don't think it's too difficult and would probably run a little smoother with more control.
+Globe.gl was great for the most part. It exposed a ton of Three functionality, although I did get some jank randomly at times so would probably want to build a globe with Three myself for a real project. 
 
 It was interesting using pure javascript again, felt like living on the edge, but it's a lot of fun for individual projects or proof of concept work.
 
 ### Known issues
-  - totally breaks if I don't use the example geojson.
   - no mobile implementation.
-  - click map doesn't do anything right now, would be straightforward enough to get data as lat and long are passed in the click event of the globe.
-  - I need to test way more, like I'm not sure if the returned image is actually correct, like a bounding box is a box, and area can be any shape, so I'd probably need to create a bounding box from the polygon, hopefully turf would have some utilities for that.
+  - I need to test way more, like I'm not sure if the returned image is actually correct.
 
 ### To do
-  - really a lot, this is very much a WIP
-  - test
   - Get a real designer :|
+  - test
   - mobile
     "for best results please use on desktop device"
   - accessibility

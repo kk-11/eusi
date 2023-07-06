@@ -1,6 +1,6 @@
 import * as turf from '@turf/turf';
 
-const handleFileUpload = (e, globeEl, setPolygonsData, setRingsData, setFileLoading) => {
+const handleFileUpload = (e, globeEl, setRingsData, setFileLoading) => {
   e.preventDefault();
   if (e.target.files && e.target.files[0]) {
     const reader = new FileReader();
@@ -16,7 +16,6 @@ const handleFileUpload = (e, globeEl, setPolygonsData, setRingsData, setFileLoad
         },
         [2000],
       );
-      setPolygonsData(JSON.parse(evt.target.result).features);
       setRingsData([{ lng: center.geometry.coordinates[0], lat: center.geometry.coordinates[1] }]);
       setFileLoading(false);
     };

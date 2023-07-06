@@ -96,6 +96,37 @@ h1 {
   animation: spin 3.2s forwards infinite linear;
 }
 
+.backdrop {
+  position: fixed;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .content {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 32px;
+    width: 400px;
+    overflow: hidden;
+    border-radius: 10px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    > img {
+      height: 90%;
+      width: 90%;
+      padding-bottom: 10px;
+    }
+  }
+}
+
+
 @keyframes spin {
   0% {
     transform: rotateY(0deg) ;
@@ -104,9 +135,3 @@ h1 {
     transform: rotateY(360deg) ;
   }
 }
-
-/* @media (min-width: 100px) {
-  body {
-    display: none;
-  }
-} */

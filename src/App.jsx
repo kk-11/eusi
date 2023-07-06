@@ -1,48 +1,45 @@
 import { useEffect, useState, useRef } from 'react';
+import Globe from 'react-globe.gl';
+
 import logo from './assets/logo.png';
 import earthNight from './assets/earth-night.jpg';
-import { handleFileUpload } from './utils';
+
+import { handleFileUpload, handleGetImageData } from './utils';
 import { useEventListener } from './hooks';
-import Globe from 'react-globe.gl';
+import { Modal } from './components';
+
 import './App.css';
 
 function App() {
+  //react stuff
   const globeEl = useRef();
-  const [image, setImage] = useState('');
   const [images, setImages] = useState([]);
   const [ringsData, setRingsData] = useState([]);
-  const [polygonsData, setPolygonsData] = useState([]);
   const [fileLoading, setFileLoading] = useState(false);
-  const [qsparams, setQsparams] = useState('?bboxCoords=1029910,6004911,1039910,6013602');
+  const [activeModalData, setActiveModalData] = useState(null);
 
+  // handle scene resizing
   const onWindowResize = () => {
     const globe = globeEl.current;
-    if (!globe) return; // why do I need to do this? test.
+    if (!globe) return; // needed? why?
     globe.camera().aspect = window.innerWidth / window.innerHeight;
-
     globe.camera().updateProjectionMatrix();
-        
     globe.renderer().setSize(window.innerWidth, window.innerHeight);
-
   };
-
-  // I don't like when custom hooks don't return data
-  // ok at top level of app
   useEventListener('resize', onWindowResize);
 
+  // handle initial rotate, and setRingData
+  // I feel like this should be handle differently
+  // i'd like to refactor both handleGetImageData, and handleFileUpload
+  // so they work better together
   useEffect(() => {
-    // move to custom hook?
     const globe = globeEl.current;
-    globe.controls().autoRotate = polygonsData.length === 0;
+    globe.controls().autoRotate = ringsData.length === 0;
     globe.controls().autoRotateSpeed = 0.35;
-  }, [polygonsData]);
-
-  const handle = async () => {
-    await fetch(`/.netlify/functions/getSentinelData${qsparams}`)
-      .then((response) => response.json())
-      .then((res) => setImage(res));
-  };
-
+    if (ringsData.length > 0) {
+      handleGetImageData(ringsData[0], setImages, setFileLoading, setRingsData);
+    }
+  }, [ringsData]);
 
   return (
     <>
@@ -50,8 +47,7 @@ function App() {
         <h1>
           Orbital
           <br />
-          {/* might be bad to put an image in a h1 */}
-          <img src={logo} className="logo" alt="OEI logo" />
+          <img src={logo} className="logo" alt="OEI logo" aria-hidden />
           Edge
           <br />
           Imaging
@@ -65,13 +61,17 @@ function App() {
           ringsData={ringsData}
           polygonAltitude={0.1}
           globeImageUrl={earthNight}
-          polygonsData={polygonsData}
-          onGlobeClick={(e) => console.log(e) || setImages((prev) => [...prev, e])}
+          onGlobeClick={(e) => handleGetImageData(e, setImages, setFileLoading, setRingsData)}
         />
       </div>
       <div className="imageList">
-        {images.map((im) => (
-          <img key={im.lat} src={earthNight} onClick={() => alert('open large image modal?')}/>
+        {/* TODO: fix rerender */}
+        {images.map(({ src, location }, i) => (
+          <img
+            key={`${src}_${i}`}
+            src={src}
+            onClick={() => setActiveModalData({ src, location })}
+          />
         ))}
       </div>
       <div className="bar bottom">
@@ -80,19 +80,18 @@ function App() {
           type="file"
           accept="application/geo+json"
           multiple={false}
-          onChange={(e) =>
-            // Not a fan of all the arguments.. maybe make a custom hook instead
-            handleFileUpload(e, globeEl, setPolygonsData, setRingsData, setFileLoading)
-          }
+          // this is just to allow same file to be selected.
+          // should be handled better, but an edge case
+          onClick={(e) => (e.target.value = null)}
+          onChange={(e) => handleFileUpload(e, globeEl, setRingsData, setFileLoading)}
         />
         <label htmlFor="files" onClick={() => setFileLoading(true)} className="fileSelect">
           {fileLoading ? 'Loading...' : 'Select file'}
         </label>
       </div>
+      {activeModalData && <Modal {...activeModalData} close={() => setActiveModalData(null)} />}
     </>
   );
 }
 
 export default App;
-
-
