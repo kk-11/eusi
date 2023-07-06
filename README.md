@@ -51,3 +51,7 @@ It was interesting using pure javascript again, felt like living on the edge, bu
     canvas is terrible for accessibility.. how to make semantic?
   - consider loading, three doesn't have percent loaded. perhaps use onGlobeLoad with pessimistic load time to start.
   - I would've liked to try radix ui for a toaster implementation for user feedback, I hear it's quite nice and I haven't played with radix at all.
+
+
+
+It would've been nice to implement some of this [cutting edge technology](https://www.youtube.com/watch?v=dQw4w9WgXcQ) if I had the time. Sorry 🫢
